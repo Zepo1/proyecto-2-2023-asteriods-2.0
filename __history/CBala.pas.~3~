@@ -1,0 +1,21 @@
+unit CBala;
+
+interface
+uses
+  Types,  Vcl.Graphics,
+  Vcl.Controls;
+type
+
+  Bala = class
+
+    color : TColor;
+
+  private
+
+  public
+
+  end;
+
+implementation
+
+end.

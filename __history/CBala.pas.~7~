@@ -1,0 +1,34 @@
+unit CBala;
+
+interface
+uses
+  Types,  Vcl.Graphics,
+  Vcl.Controls;
+type
+
+  Bala = class
+
+    color : TColor;
+
+  private
+    //Bitmap Bala
+    BtBala: TBitmap;
+
+  public
+     constructor Create( color: TColor; ancho: integer; alto: integer );
+
+  end;
+
+implementation
+
+{ Bala }
+
+constructor Bala.Create(color: TColor; ancho, alto: integer);
+begin
+  BtBala.Create;
+
+  BtBala.Width := ancho;
+  BtBala.Height := alto;
+end;
+
+end.

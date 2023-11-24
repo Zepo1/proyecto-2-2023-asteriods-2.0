@@ -1,0 +1,23 @@
+unit CBala;
+
+interface
+uses
+  Types,  Vcl.Graphics,
+  Vcl.Controls;
+type
+
+  Bala = class
+
+    color : TColor;
+
+  private
+    //Bitmap Bala
+    BtBala: TBitmap;
+
+  public
+
+  end;
+
+implementation
+
+end.
