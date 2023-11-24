@@ -4,17 +4,20 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Types, CNave;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Types, CNave,Uasteroide, Vcl.ExtCtrls;
 
 type
   TForm1 = class(TForm)
-
+    Timer1: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure FormPaint(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure Timer1Timer(Sender: TObject);
   private
     { Private declarations }
     ObjNave : Nave;
+    B : Ball;
+
   public
     { Public declarations }
     procedure dibujarNave(Cx: integer; Cy: integer);
@@ -34,6 +37,10 @@ implementation
 //-------------------------------------------------------------
 procedure TForm1.FormCreate(Sender: TObject);
 begin
+
+   B := Ball.Create;
+   B.setValues(100,100,3);
+
   dimensionPantallaX := Screen.Width;
   dimensionPantallaY := Screen.Height;
   numeroMovimiento := 50;
@@ -89,18 +96,8 @@ end;
 //-------------------------------------------------------------
 procedure TForm1.FormPaint(Sender: TObject);
 begin
-
   dibujarNave(Cx, Cy);
-  //try
-
-    // Dibuja en el primer Canvas
-    //DibujarEnCanvas1(Bitmap.Canvas);
-
-    // Dibuja el contenido del primer Canvas en el segundo Canvas
-    //Canvas.Draw(0, 0, Bitmap);
-  //finally
-    //Bitmap.Free;
-  //end;
+  B.Draw(Canvas);
 end;
 //-------------------------------------------------------------
 procedure TForm1.limpiarPantalla(Canvas: TCanvas; ColorFondo: TColor);
@@ -108,6 +105,12 @@ begin
     Canvas.Brush.Color := ColorFondo;
     Canvas.FillRect(Canvas.ClipRect);
 end;
+procedure TForm1.Timer1Timer(Sender: TObject);
+begin
+     B.Move(7,1);
+     Repaint;
+end;
+
 //-------------------------------------------------------------
 procedure TForm1.dibujarBala(Cx, Cy: integer);
 begin
@@ -117,7 +120,7 @@ end;
 procedure TForm1.dibujarNave(Cx: integer; Cy: integer);
 begin
     limpiarPantalla(Canvas, clWindowText);
-    Canvas.Draw( Cx, Cy, ObjNave.CvNave);
+    Canvas.Draw( Cx, Cy, ObjNave.getBtNave);
 end;
 
 end.

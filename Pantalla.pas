@@ -47,7 +47,7 @@ begin
   Cx := dimensionPantallaX div 2;
   Cy := dimensionPantallaY div 2;
   //Objeto instanciado = Se coloca el color de la nave y su ancho y alto
-  ObjNave := Nave.Create( clYellow, 50, 50 );
+  ObjNave := Nave.Create( clWhite, 50, 50 );
 end;
 //-------------------------------------------------------------
 procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word;
