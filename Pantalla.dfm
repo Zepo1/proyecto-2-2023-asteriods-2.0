@@ -12,6 +12,7 @@ object Form1: TForm1
   Font.Name = 'Segoe UI'
   Font.Style = []
   WindowState = wsMaximized
+  OnClick = FormClick
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnPaint = FormPaint

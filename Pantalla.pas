@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Types, CNave,Uasteroide, Vcl.ExtCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Types, CNave,Uasteroide, Vcl.ExtCtrls,
+  Vcl.StdCtrls;
 
 type
   TForm1 = class(TForm)
@@ -13,6 +14,7 @@ type
     procedure FormPaint(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Timer1Timer(Sender: TObject);
+    procedure FormClick(Sender: TObject);
   private
     { Private declarations }
     ObjNave : Nave;
@@ -35,6 +37,11 @@ implementation
 
 {$R *.dfm}
 //-------------------------------------------------------------
+procedure TForm1.FormClick(Sender: TObject);
+begin
+  ObjNave.addBala;
+end;
+
 procedure TForm1.FormCreate(Sender: TObject);
 begin
 
@@ -99,6 +106,7 @@ begin
   dibujarNave(Cx, Cy);
   B.Draw(Canvas);
 end;
+
 //-------------------------------------------------------------
 procedure TForm1.limpiarPantalla(Canvas: TCanvas; ColorFondo: TColor);
 begin

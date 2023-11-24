@@ -3,7 +3,7 @@ unit CNave;
 interface
 uses
   Types,  Vcl.Graphics,
-  Vcl.Controls;
+  Vcl.Controls, CBala;
 
 type
   Nave = class
@@ -12,6 +12,8 @@ type
 
     ancho : integer;
     alto  : integer;
+
+    Balas : Array of Bala;
   private
     //Bitmap Nave
     BtNave: TBitmap;
@@ -20,14 +22,27 @@ type
   public
     constructor Create( color: TColor; ancho: integer; alto: integer );
     procedure dibujarNave;
+    procedure dibujarBala;
     procedure setBtNave();
     function getBtNave(): TBitmap;
+    procedure addBala;
 
   end;
 
 implementation
 
 { Nave }
+
+procedure Nave.addBala;
+var
+  b : Bala;
+begin
+  b := Bala.Create(clYellow,10,10);
+  SetLength(Balas, Length(Balas) + 1);
+  Balas[High(Balas)] := b;
+
+  dibujarBala();
+end;
 
 constructor Nave.Create( color: TColor; ancho: integer; alto: integer);
 
@@ -55,6 +70,17 @@ end;
 function Nave.getBtNave: TBitmap;
 begin
   Result := BtNave;
+end;
+
+procedure Nave.dibujarBala;
+var
+  b: Bala;
+begin
+ // Recorrer el array usando un bucle for
+  for b in Balas do
+  begin
+
+  end;
 end;
 
 procedure Nave.dibujarNave;

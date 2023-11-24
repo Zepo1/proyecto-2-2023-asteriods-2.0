@@ -27,13 +27,9 @@ implementation
 
 constructor Bala.Create(color: TColor; ancho, alto: integer);
 begin
-  BtBala.Create;
-
-  BtBala.Width := ancho;
-  BtBala.Height := alto;
   Self.color := color;
 
-  dibujarBala();
+//  dibujarBala();
 end;
 
 procedure Bala.dibujarBala;
