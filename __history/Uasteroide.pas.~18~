@@ -1,0 +1,52 @@
+unit Uasteroide;
+
+interface
+Uses Graphics;
+Type
+    Asteroid = Class
+      Private
+          Cx,Cy : Integer;
+          R     : Integer;
+          nivel : integer;
+      Public
+          constructor Create( x, y, nivel: integer );
+          Procedure Draw(Pantalla : TCanvas);
+          Procedure Move(dx,dy:Integer);
+          procedure setradio(niv:integer);
+    End;
+
+implementation
+
+{ Ball }
+
+constructor Asteroid.Create(x, y, nivel: integer);
+begin
+     Cx:=x;
+     Cy:=y;
+
+     setradio(nivel);
+end;
+
+procedure Asteroid.Draw(Pantalla: TCanvas);
+begin
+     Pantalla.pen.Color:=clwhite;
+     Pantalla.Ellipse(Cx-r,Cy-r,Cx+r,Cy+r);
+end;
+
+procedure Asteroid.Move(dx, dy:Integer);
+begin
+     Cx:=Cx+dx;
+     Cy:=Cy+dy;
+end;
+
+///nivel de los sateroides
+procedure Asteroid.setradio(niv: integer);
+begin
+   case  niv of
+      1: R:=20;
+      2: R:=50;
+      3: R:=80;
+   end;
+end;
+
+end.

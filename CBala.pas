@@ -2,46 +2,42 @@ unit CBala;
 
 interface
 uses
-  Vcl.Graphics,
-  Vcl.Controls;
-type
+classes, System.Types, graphics;
+   type
+    Bala = class
+      private
+        velocidad: integer;
+      public
+        disponible: boolean;
+        punto: TPoint;
+        angulo: integer;
+        constructor Create(x, y: integer);
+        procedure dibujar(canvas: TCanvas);
+        procedure mover;
 
-  Bala = class
-
-    color : TColor;
-
-  private
-    //Bitmap Bala
-    BtBala: TBitmap;
-
-  public
-     constructor Create( color: TColor; ancho: integer; alto: integer );
-     procedure dibujarBala;
-     function getBala : TBitmap;
-
-  end;
-
+    end;
 implementation
 
-{ Bala }
+{ bala }
 
-constructor Bala.Create(color: TColor; ancho, alto: integer);
+constructor bala.Create(x, y: integer);
 begin
-  Self.color := color;
-
-//  dibujarBala();
+  punto := point(x, y);
+  velocidad := 20;
+  disponible := true;
 end;
 
-procedure Bala.dibujarBala;
+procedure bala.dibujar(canvas: TCanvas);
 begin
-  // Dibuja Bala
-  getBala().Canvas.Brush.Color := color;
-  getBala().Canvas.Ellipse(getBala().Canvas.ClipRect);
+  Canvas.Pen.Color := clBlack;
+  Canvas.Pen.Width := 10;
+  Canvas.Polygon([punto, punto]);
 end;
 
-function Bala.getBala: TBitmap;
+procedure bala.mover;
 begin
-  Result := BtBala;
+  punto.X := punto.X + trunc(velocidad * sin(angulo*pi/180));
+  punto.Y := punto.Y + -trunc(velocidad * cos(angulo*pi/180));
 end;
 
 end.

@@ -1,51 +1,61 @@
-unit Uasteroide;
+unit UAsteroide;
 
 interface
-Uses Graphics;
+Uses Graphics, System.Types;
 Type
-    Ball = Class
+    Asteroid = Class
       Private
-          Cx,Cy : Integer;
-          R     : Integer;
-          nivel : integer;
+
+
       Public
-          Procedure setValues(x,y,nivel:Integer);
+          angulo: integer;
+          velocidad: integer;
+          Radio   : Integer;
+          Cx,Cy : Integer;
+          constructor Create(x,y,radio, angulo:Integer);
           Procedure Draw(Pantalla : TCanvas);
-          Procedure Move(dx,dy:Integer);
-          procedure setradio(niv:integer);
+          Procedure Move;
+          procedure setRadio( radio: integer );
     End;
 
 implementation
 
-{ Ball }
 
-procedure Ball.Draw(Pantalla: TCanvas);
+constructor Asteroid.Create(x, y, radio, angulo: Integer);
 begin
-     Pantalla.pen.Color:=clwhite;
-     Pantalla.Ellipse(Cx-r,Cy-r,Cx+r,Cy+r);
+  Cx:=x;
+  Cy:=y;
+  setRadio(radio);
+  Self.angulo := angulo;
+  randomize;
+  velocidad := random(5)+5;
 end;
 
-procedure Ball.Move(dx, dy:Integer);
+procedure Asteroid.Draw(Pantalla: TCanvas);
 begin
-     Cx:=Cx+dx;Cy:=Cy+dy;
+     Pantalla.pen.Color:=clBlack;
+     Pantalla.Pen.Width := 4;
+     Pantalla.Ellipse(Cx-radio,Cy-radio,Cx+radio,Cy+radio);
 end;
 
-///nivel de los sateroides
-procedure Ball.setradio(niv: integer);
+procedure Asteroid.Move;
+var dx, dy: integer;
 begin
-   case  niv of
-      1: R:=20;
-      2: R:=50;
-      3: R:=80;
-   end;
+     dx := trunc(velocidad * sin(angulo*pi/180));
+     dy := -trunc(velocidad * cos(angulo*pi/180));
+     Cx:=Cx+dx;
+     Cy:=Cy+dy;
 end;
 
-procedure Ball.setValues(x, y, nivel: Integer);
 
+
+procedure Asteroid.setRadio( radio: integer );
 begin
-     Cx:=x;   Cy:=y;
-     setradio(nivel);
-
+  case radio of
+      1: Self.radio := 20;
+      2: Self.radio := 50;
+      3: Self.radio := 150;
+  end;
 end;
 
 end.
